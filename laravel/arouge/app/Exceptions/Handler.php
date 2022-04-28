@@ -38,4 +38,14 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, \Throwable $e)
+    {
+        if ($e instanceof TokenMismatchException) {
+            return redirect()
+                    ->back();
+        }
+        return parent::render($request, $e);
+    }
+
 }
