@@ -24,7 +24,7 @@ Route::get('/store/login', 'App\Http\Controllers\StoreController@login')->name('
 Route::get('/store/login_auth', 'App\Http\Controllers\StoreController@login_auth')->name('store_login_auth');
 Route::post('/store/login_auth', 'App\Http\Controllers\StoreController@login_auth')->name('store_login_auth');
 Route::get('/store/list', 'App\Http\Controllers\StoreController@list')->name('store_list');
-Route::post('/store/list', 'App\Http\Controllers\StoreController@list')->name('store_list_post');
+Route::post('/store/list', 'App\Http\Controllers\StoreController@list')->name('store_list_search');
 Route::get('/store/input', 'App\Http\Controllers\StoreController@input')->name('store_input');
 Route::get('/store/input/{id}', 'App\Http\Controllers\StoreController@input')->name('store_input_id');
 Route::get('/store/confirm', 'App\Http\Controllers\StoreController@confirm')->name('store_confirm');
@@ -33,6 +33,7 @@ Route::get('/store/regist', 'App\Http\Controllers\StoreController@regist')->name
 Route::post('/store/regist', 'App\Http\Controllers\StoreController@regist')->name('store_regist_post');
 Route::get('/store/complete', 'App\Http\Controllers\StoreController@complete')->name('store_complete');
 Route::get('/store/csv_input', 'App\Http\Controllers\StoreController@csv_input')->name('store_csv_input');
+Route::get('/store/csv_upload', 'App\Http\Controllers\StoreController@csv_upload')->name('store_csv_upload');
 Route::post('/store/csv_upload', 'App\Http\Controllers\StoreController@csv_upload')->name('store_csv_upload');
 Route::get('/store/csv_complete', 'App\Http\Controllers\StoreController@csv_complete')->name('store_csv_complete');
 Route::post('/store/view_change', 'App\Http\Controllers\StoreController@view_change')->name('store_view_change');

@@ -1,21 +1,26 @@
-<html>
-<head>
-</head>
-<body>
+@extends('layouts.app_login')
+
+@section('content')
+	<div class="area-login">
+		<div class="area-wrap">
+			<div class="login">
+				<h1>アルージェ／ジュレリッチ<br>取扱店管理</h1>
 @if (session('status'))
 		{{ session('status') }}
 @endif
-
-login
-<form action="{{route('store_login_auth')}}" method="post">
+				<form action="{{route('store_login_auth')}}" method="post">
 @csrf
-<br>
-ID<input type="text" name="id">
-<br>
-password<input type="password" name="password">
-<br>
-<button type="submit">ログイン</button>
-</form>
-
-</body>
-</html>
+					<dl>
+						<dt>ログインID</dt>
+						<dd><input type="text" placeholder="ID" name="id" /></dd>
+					</dl>
+					<dl>
+						<dt>パスワード</dt>
+						<dd><input type="password" placeholder="Password" name="password" /></dd>
+					</dl>
+					<div class="submit"><button>ログイン</button></div>
+				</form>
+			</div>
+		</div>
+	</div>
+@endsection
