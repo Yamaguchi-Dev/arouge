@@ -1,27 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-				<form action="">
+				<form action="{{route('store_list_search')}}" method="post">
 					<div class="elem-form">
 						<dl>
 							<dt>店名</dt>
-							<dd><input type="text"/></dd>
+							<dd><input type="text" name="name"/></dd>
 						</dl>
 						<dl>
 							<dt>郵便番号</dt>
-							<dd><input type="text" size="12"/></dd>
+							<dd><input type="text" name="zipcode" size="12"/></dd>
 						</dl>
 						<dl>
 							<dt>都道府県</dt>
 							<dd>
-								<select>
+								<select name="pref_id">
 									<option value="">北海道</option>
 								</select>
 							</dd>
 						</dl>
 						<dl>
 							<dt>市区郡町村以降</dt>
-							<dd><textarea></textarea></dd>
+							<dd><textarea name="pref_id"></textarea></dd>
 						</dl>
 						<dl>
 							<dt>電話番号</dt>

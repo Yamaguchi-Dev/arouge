@@ -79,3 +79,8 @@ Route::get('/sample/input/{id}', 'App\Http\Controllers\SampleController@input')-
 Route::post('/sample/comfirm', 'App\Http\Controllers\SampleController@comfirm')->name('sample_comfirm');
 Route::post('/sample/regist', 'App\Http\Controllers\SampleController@regist')->name('sample_regist');
 Route::post('/sample/complete', 'App\Http\Controllers\SampleController@complete')->name('sample_complete');
+
+
+// 検索用API
+Route::get('/api/store/arouge_search','App\Http\Controllers\API\StoreController@arouge_search')->name('store_arouge_search');
+Route::get('/api/store/geleerich_search','App\Http\Controllers\API\StoreController@geleerich_search')->name('store_geleerich_search');

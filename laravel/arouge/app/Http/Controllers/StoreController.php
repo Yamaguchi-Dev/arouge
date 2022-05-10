@@ -59,7 +59,8 @@ class StoreController extends Controller
         }
 
         $user = array();
-        $user["id"] = $res->login_id;
+        $user["id"] = $res->id;
+        $user["login_id"] = $res->login_id;
         $user["password"] = $res->password;
         $user["name"] = $res->name;
 
@@ -68,14 +69,21 @@ class StoreController extends Controller
         return redirect(route('store_list'));
     }
 
+    public function logout()
+    {
+        return redirect(route('store_login'));
+    }
+
     public function list(Request $search)
     {
-        return view('store.list');
+        $title = "アルージェ取扱店一覧";
+        return view('store.list', compact('title'));
     }
 
     public function input()
     {
-        return view('store.input');
+        $title = "アルージェ取扱店新規追加";
+        return view('store.input', compact('title'));
     }
 
     public function confirm()
@@ -92,12 +100,26 @@ class StoreController extends Controller
 
     public function csv_input()
     {
-        return view('store.csv_input');
+        $errors = array();
+        if (Session::has('errors')) {
+            $errors = Session::get('errors');
+            Session::forget('errors');
+        }
+        $title = "アルージェ取扱店CSVアップロード";
+        return view('store.csv_input', compact('errors', 'title'));
     }
 
     public function csv_upload(Request $request)
     {
+        $errors = array();
+        if (empty($request->file('file_csv'))) {
+            $errors[] = "ファイルが選択されていません";
+            Session::put('errors', $errors);
+            return redirect()->route("store_csv_input");
+        }
         $file_path = $request->file('file_csv')->path();
+
+        $pref = config('common.pref');
 
         $file_content = new \SplFileObject($file_path);
 
@@ -110,15 +132,57 @@ class StoreController extends Controller
 
         $contents_data = array();
         // 文字化け対応
-        foreach($file_content as $line)
-        {
+        foreach($file_content as $line) {
             $ar_l = array();
             foreach ($line as $l) {
                 $ar_l[] = mb_convert_encoding($l, 'UTF-8', 'SJIS');
             }
             $contents_data[] = $ar_l;
         }
-dd($contents_data);
+
+        // バリデーション
+
+
+
+        // 初期設定 全てのステータスを2にする
+        Store::where('status', '=', 1)->update(["status" => 2]);
+
+        $user_data = $this->user_data;
+        // アップロード
+        foreach ($contents_data as $k => $v) {
+            if ($k < 1) continue;
+
+            $stores = new Store();
+            if (!empty($v[0])) {
+                $stores = $stores->find($v[0]);
+            }
+            $stores->category_id = $v[1] == "ジュレリッチ" ? 2 : 1;
+
+            $stores->users_id = $user_data['id'];
+
+            $stores->name = $v[2];
+            $stores->zipcode = $v[3];
+
+            $pref_id = array_keys($pref, $v[4]);
+            $stores->pref_id = $pref_id[0];
+
+            $stores->address = $v[5];
+            $stores->tel = $v[6];
+
+            $bland_arr = explode(",", $v[7]);
+            $bland_id_arr = array();
+            foreach ($bland_arr as $v2) {
+                $bland_id_arr[] = $v2 == "アルージェ" ? 1 : 2;
+            }
+            $stores->bland_csv = implode(",", $bland_id_arr);
+
+            $stores->view_status = 1;
+            $stores->status = 1;
+
+            $stores->save();
+        }
+        session()->flash('status', 'アップロードしました');
+        return redirect()->route("store_csv_input");
     }
 
     public function csv_complete()
@@ -131,7 +195,8 @@ dd($contents_data);
 
     public function delete()
     {
-        return view('store.delete_search');
+        $title = "アルージェ取扱店削除";
+        return view('store.delete_search', compact('title'));
     }
 
     public function delete_search()

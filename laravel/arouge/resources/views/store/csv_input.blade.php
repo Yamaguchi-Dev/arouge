@@ -13,6 +13,13 @@
 							</ul>
 						</div>
 @endif
+@if (session('status'))
+						<div>
+							<ul>
+								<li>{{ session('status') }}</li>
+							</ul>
+						</div>
+@endif
 						<dl>
 							<dt><label><input type="file" name="file_csv" id="input-file"/><span class="label">CSVファイル選択</span></label></dt>
 							<dd><input type="text" readonly value="ファイル未選択" id="label-file"/></dd>
