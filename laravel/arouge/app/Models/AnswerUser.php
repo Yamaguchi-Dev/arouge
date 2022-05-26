@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class AnswerUser extends Model
 {
     use HasFactory;
+
+    public function answer_choice()
+    {
+        return $this->hasMany('App\Models\AnswersChoice','answer_users_id', 'id');
+    }
 }

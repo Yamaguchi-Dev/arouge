@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/*
+	base
+=========================================*/
+html {
+	background: #00000088;
+	background: rgba(0, 0, 0, 0.5);
+}
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-height: 100vh;
+	padding: 1em;
+}
+
+/*
+	.area-container
+=========================================*/
+.area-container {
+	min-width: 480px;
+	min-height: auto;
+	margin: 0;
+	padding: 0;
+	border-top: 4px solid var(--main-color);
+}
+/*
+	.area-body
+=========================================*/
+.area-body {
+	display: block;
+}
+
+/*
+	.area-main
+=========================================*/
+.area-main {
+	padding: 1px;
+}
+
+/*
+	
+=========================================*/
+
+
+ 

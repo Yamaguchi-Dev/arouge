@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>アルージェを試す（サンプル応募）｜Arouge（アルージェ）</title>
+<meta name="description" content="Arouge（アルージェ）のサンプル応募はこちらから。抽選で「アルージェのバリア保湿 サンプルセット」をプレゼント。ぜひアルージェを体感してください。">
+<meta name="keywords" content="サンプル,応募,アルージェ,Arouge,敏感肌,バリア保湿,スキンケア">
+<link rel="stylesheet" href="/shared/css/reset.css" media="all">
+<link rel="stylesheet" href="/shared/css/common.css" media="all">
+<link rel="stylesheet" href="/shared/css/common_sp.css" media="all">
+<link rel="stylesheet" href="/shared/css/sample.css" media="all">
+<script src="/shared/js/jquery.js"></script>
+<script src="/shared/js/script.js"></script>
+
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5GCD4SP');</script>
+<!-- End Google Tag Manager -->
+</head>
+<body>
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5GCD4SP"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+
+    <!--#include virtual="/shared/include/header.html" -->
+    <div class="wrapper">
+		<div class="title_bg">
+			<div class="breadClumbs">
+				<ul>
+					<li><a href="/">TOP</a>&gt;</li>
+					<li><a href="/campaign/">キャンペーン</a>&gt;</li>
+					<li>アルージェを試す</li>
+				</ul>
+			</div>
+	
+			<div class="title01">
+				<div class="titleInner">
+					<h1>アルージェを試す<span>合計<br class="sp">25,000名様に<br class="pc">&#147;アルージェの<br class="sp">バリア保湿&#148;を体感<br><span class="fs">トラブルリペア リキッド <br class="sp">サンプルプレゼント</span></span></h1>
+				</div>
+			</div>
+		</div>
+
+        
+		<div class="cont_bg">
+			<div class="contents end">
+	
+				<p class="campaign"><img src="images/campaign_end.png" alt="本キャンペーンは終了いたしました。たくさんのご応募、ありがとうございました。" class="pc">
+					<img src="images/campaign_end_sp.png" alt="本キャンペーンは終了いたしました。たくさんのご応募、ありがとうございました。" class="sp"></p>
+				
+			 </div>
+		</div>
+		
+	</div>
+    <!--#include virtual="/shared/include/footer.html" -->
+</body>
+</html>

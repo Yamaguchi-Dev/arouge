@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+
+/*
+	default
+=========================================*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+figure, figcaption {
+	margin: 0;
+	padding: 0;
+	font: inherit;
+	font-size: 100%;
+	-ms-line-break: strict;
+	line-break: strict;
+	word-wrap: break-word;
+}
+sub {
+	vertical-align: text-bottom;
+}
+sup {
+	vertical-align: text-top;
+}
+sub,
+sup {
+	line-height: 1em;
+	font-size: 0.7em;
+}
+html:not(:target) sub,
+html:not(:target) sup {
+	font-size: 0.5em;
+}
+em, i, address, optgroup, q{
+	font-style: normal;
+	font-weight: normal;
+}
+q:before,
+q:after {
+	content: "";
+}
+img, input {
+	-ms-interpolation-mode: bicubic;
+}
+img, fieldset, table, tbody, thead, tr, th, td {
+	border: none;
+}
+img, input, select, button {
+	vertical-align: middle;
+}
+ol, ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption, th, td {
+	text-align: inherit;
+	vertical-align: inherit;
+	font-weight: inherit;
+}
+select {
+	font-style: normal;
+}
+table {
+	_font-size: 1em;
+}
+input, textarea {
+	font-size: 1em;
+}
+label {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+}
+html {
+	overflow-y: scroll;
+	height: 100%;
+	-webkit-text-size-adjust: none;
+}
+body {
+	height: 100%;
+	padding: 0;
+	font-size: 100%;
+	line-height: 1;
+	position: relative;
+}
+html:not(:target) body {
+	font-size: 16px;
+	font-size: 100%\9;
+}
+div, ol, ul, li, dl, dt, dd {
+	position: relative;
+	zoom: 1;
+}
+
+
+
+
