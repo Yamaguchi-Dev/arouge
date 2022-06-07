@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::group(['middleware' => ['cors']], function(){
+    Route::get('/store/geleerich_city','App\Http\Controllers\API\StoreController@geleerich_city');
+    Route::get('/store/geleerich_search','App\Http\Controllers\API\StoreController@geleerich_search');
+});

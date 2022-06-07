@@ -31,7 +31,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 	
-    <!--#include virtual="/shared/include/header_http.html" -->
     <div class="wrapper">
 		<div class="title_bg">
 			<div class="breadClumbs">
@@ -53,162 +52,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
 		<div class="cont_bg">
 			<div class="contents form sample_cont">
-				<!--<h2>モイスチャー ミストローション<span class="fonttype01">&#8545;</span> <br class="sp">サンプルプレゼント</h2>-->
-				
-				<div class="campaign">
-					<p><img src="/sdocs/sample/images/sample_pc_img.jpg" alt="敏感肌の乾燥・肌荒れ予防にアルージェのバリア保湿" class="pc"/><img src="images/sample_sp_img.jpg" alt="敏感肌の乾燥・肌荒れ予防にアルージェのバリア保湿" class="sp"/></p>
-				</div>
-				
-				<div class="new_layout">
-                    <!--<div class="col_block layout_type01">
-                        <p class="images ac"><img src="images/img_sample01.png" alt="イメージ"></p>
-                        
-                        <p class="blue ttl ac bold_text">空気の乾燥や、マスク肌荒れによって<br>「カサつき」や「赤み」、<br>「ヒリヒリ感」などの<br>肌トラブルに悩んでいませんか？</p>
-                        
-                    </div>-->
-					
-					<p class="pink ttl01 ac bold_text">やさしく、心地よく！<br>敏感肌の日常に必要なUV対策を</p>
-					
-                    <div class="blue_bdr_bg dot">
-                        
-                        <p class="wrap_ttl"><span>「アルージェの<br class="sp">バリア保湿」で<br class="pc">敏感肌の<br class="sp">角層バリアをサポート</span></p>
-                        
-					<div class="col_block block01">
-						<dl class="item">
-							<dt class="blue_item">天然セラミド</dt>
-							<dd>肌にもともと存在し、うるおいを閉じ込める力をもつセラミド。さまざまな種類のセラミドの中でも、アルージェは肌なじみのよい天然セラミド（保湿成分）を配合。肌をうるおいで満たし、角層バリアをサポートします。</dd>
-						</dl>
-						<div class="item_icon"><img src="/barrier/images/image-kodawari-cross.png" alt=""></div>
-						<dl class="item">
-							<dt class="blue_item">ナノモイスチャー<br>テクノロジー</dt>
-							<dd>界面活性剤を使わずに天然セラミドをナノ粒子化することで、角層のすみずみまで届ける高い浸透性と肌にとけこむような高い親和性を実現。</dd>
-						</dl>
-					</div>
-					
-					
-					<!--<div class="ac">
-						<p class="yellow_round_ttl mb20">保湿成分配合</p>
-					</div>
-					
-					<p class="ac mb20">角層内のうるおいを保つ、保湿因子に着目し、3種類の保湿成分を配合。</p>
-					<ul class="item_list col_block three_item">
-						<li class="blue_item">天然セラミド</li>
-						<li class="blue_item">カンゾウ葉エキス</li>
-						<li class="blue_item">トリメチルグリシン</li>
-					</ul>-->
-					
-					<div class="mt40 info_block">
-						<div class="white_bk">
-						<div class="box ac">
-							<p class="yellow_round_ttl mb20">肌荒れ防止成分</p>
-							<!--<p class="txt mb10">2種類の「肌荒れケア成分」を配合。赤み、ヒリつきなどの肌荒れをケアし、荒れた肌をいたわります。</p>-->
-							<ul class="item_list">
-								<li class="blue_item">グリチルリチン酸2Kまたは<br>グリチルレチン酸ステアリル</li>
-								<li class="blue_item mb0">&#949;-アミノカプロン酸<br>またはアミノカプロン酸<br><span class="anno">※モイストUVクリームを除く</span></li>
-							</ul>
-						</div>
-						</div>
-						<div class="white_bk mt40">
-						<div class="box ac">
-							<p class="yellow_round_ttl mb20">低刺激処方</p>
-							<div class="hypo_box">
-								<ul class="item_circle">
-									<li><span>無香料</span></li>
-									<li><span>無着色</span></li>
-									<li class="anno_circle"><span>鉱物油<br>無添加<span class="caption_small">＊1</span></span></li>
-									<li class="anno_circle"><span>界面活性剤<br>無添加<span class="caption_small">＊2</span></span></li>
-									<li class="anno_circle"><span>エチル<br>アルコール<br>無添加<span class="caption_small">＊3</span></span></li>
-									<li><span>パラベン<br>無添加</span></li>
-								</ul>
-							</div>
-							<dl class="hypo_box mt15">
-								<dt class="blue_item"><span class="bold_text">3</span>つのテスト済み</dt>
-								<dd class="al">◯敏感肌の方のご協力によるパッチテスト済み<br>◯アレルギーテスト済み<br>◯コメドテスト済み<sup>＊1・2</sup><br><span class="sfont">［すべての方に刺激・アレルギー・コメド（ニキビのもと）が生じないというわけではありません。］</span></dd>
-							</dl>
-							<p class="anno al mt10 mb0">＊1リップエッセンスを除く ＊2クレンジング・ソープ・フォームを除く ＊3ソープを除く</p>
-						</div>
-						</div>
-                        
-                        <!--<p class="pink ttl02 ac bold_text mt40">角層バリアを整えることが、紫外線などの外的刺激を受けにくい肌へと導き、紫外線ケアにも繋がります。</p>-->
-					</div>
-                    </div>
-                    
-                    <p class="cross"><img src="/barrier/images/image-kodawari-cross.png" alt=""></p>
-                    
-                    <div class="green_bdr_bg dot">
-                        
-                        <p class="wrap_ttl"><span>１年を通して、<br class="sp">やさしく<br>生活紫外線から肌を守る</span></p>
-                        
-                        <ul class="point">
-                            <li>ノンケミカル<br>処方</li>
-                            <li>界面活性剤<br>無添加</li>
-                            <li>石けんで<br>落とせる</li>
-                        </ul>
-                        
-						<div class="white_bk character">
-                        <p class="text">肌へのやさしさを追求した低刺激UVクリーム<br>毎日使うものだから、お肌を整える効果をプラス！</p>
-                        <p class="text anno">日常使い用/SPF22・PA＋＋</p>
-						</div>
-
-                    </div>
-                    
-                    
-					
-					<div class="campaign">
-						<a href="/special/moisture_mist_lotion_2.html" class="hover"><img src="/sdocs/sample/images/sample_sub_img.png" alt="モイスチャー ミストローションⅡ"></a>
-                        
-                        <a href="/special/moist_uv_cream.html" class="hover mt20"><img src="/sdocs/sample/images/sample_sub02_img.png" alt="モイストUVクリーム  "></a>
-					</div>
-					
-                    <div class="col_block sp_block sanrio_block">
-                        <p class="images ac"><img src="images/img_sample02.png" alt="イメージ"></p>
-                        
-                        <p class="pink ttl02 ac bold_text">アルージェこだわりの<br class="sp">保湿力とやさしさを<br>ご体感ください。</p>
-                    </div>
-					
-					
-					<div class="blue_area">
-						<p><span>Wチャンスとして、サンプルご当選者様には、さらに</span><br>抽選で5名様にUVクリーム（現品）をプレゼント！<span><br>応募方法はサンプルご当選者様にお送りする封筒内のキャンペーン案内をご確認ください。</span></p>
-					</div>
-				</div>
-				
-				
-				<div class="application_details">
-					<p class="ttl">【応募期間】</p>
-					<ul>
-						<li>・{{date("Y年m月d日", strtotime($data["apply_start"]))}}（{{config('common.week_jp')[date("w", strtotime($data["apply_start"]))]}}）～{{date("Y年m月d日", strtotime($data["apply_end"]))}}（{{config('common.week_jp')[date("w", strtotime($data["apply_end"]))]}}）</li>
-						<!--<li>
-							<dl>
-								<dt>・応募締切：</dt>
-								<dd>第1回　2020年1月31日（金）23:59<br>第2回　2020年2月16日（日）23:59<br>第3回　2020年3月1日（日）23:59<br>第4回　2020年3月15日（日）23:59<br>第5回　2020年3月31日（火）23:59<br>※各締切ごとの抽選で、期間合計25,000名様にお届けいたします。</dd>
-							</dl>
-						</li>-->
-					</ul>
-					
-					<p class="ttl">【当選発表】</p>
-					<ul>
-						<li>・発表は、賞品の発送をもってかえさせていただきます。</li>
-					</ul>
-					
-					<p class="ttl">【応募上のご注意】</p>
-					<ul>
-						<li>・ご応募は期間中お一人様１回限り、かつ同一ご住所からのご応募は２人までとさせていただきます。</li>
-						<li>・上記の条件を満たしていても、同一の方から複数のご応募があることが明らかな場合、もしくは容易に推測できる場合には、その一部または全ての発送をお断りいたします。</li>
-						<li>・お届け先は日本国内に限らせていただきます。</li>
-						<li>・お届け先は正確にご記入ください。ご記入内容に不備がある場合には、当選を無効とさせていただく場合がございます。<br>また、発送にはゆうメールを使用いたしますので、表札の出ていないお宅にはお届けできない場合がございます。</li>
-					</ul>
-					
-					<p class="ttl">【個人情報の取扱いについて】</p>
-					<ul>
-						<li>・当キャンペーンにご応募いただいたお客さまの個人情報は、当サイト<a href="http://www.arouge.com/policy.html">プライバシーポリシー</a>に基づいて取り扱います。</li>
-					</ul>
-				</div>
+<?php
+echo $data['summary'];
+?>
 					
 					<div>
-						<h3>下記のアンケートにお答えのうえ、ご応募ください。</h3>
-						<p><span class="red_text">※</span>は入力必須項目です。</p>
-						
-						
 						<form method="post" action="sample0a.aspx" id="form1" name="form1">
 							<input type="hidden" name="sample_select2" value="1">
 							
@@ -349,20 +197,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 							</dd>
 							
 							
-							<!--<dt>E-mailアドレス</dt>
+							<dt>E-mailアドレス</dt>
 							<dd class="padl0">
-								<p class="desc">＜全薬工業メール会員新規登録のご案内＞<br>メールアドレスをご登録いただくと、健康情報のほか製品やキャンペーン情報、サービスに関するアンケート参加のご案内をお届けいたします。<br><span>※すでにご登録済み、または今回登録されない方は入力不要です。</span></p>
 							<ul class="input-02">
-							<li><input type="text" name="txtEmail" value="" class="w600px variable" id="text-mail-01" maxlength="50" placeholder="※ 半角でご入力ください。">
-							<li class="w100p">
-							<label><span>今後、全薬工業より、商品情報またはサービスに関するアンケートやモニター参加依頼などをメールにてお送りいたします。 </span></li>
-							<span class="attention">※ 半角でご入力ください。</span></li>
+							<li><input type="text" name="txtEmail" value="{{old('txtEmail')}}" class="w600px variable" id="text-mail-01" maxlength="50" placeholder="※ 半角でご入力ください。">
 							</ul>
-							<ul class="input-03">
-								<li><label><input type="radio" name="register" value="登録する">登録する</label></li>
-								<li><label><input type="radio" name="register" value="既に登録済。または今回は登録しない">既に登録済。または今回は登録しない</label></li>
-							</ul>
-							</dd>-->
+							</dd>
 							
 							
 							
@@ -544,6 +384,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	
 		</div>
 	</div>
-    <!--#include virtual="/shared/include/footer_http.html" -->
 </body>
 </html>

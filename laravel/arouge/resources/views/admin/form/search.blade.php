@@ -68,12 +68,30 @@
 					</dl>
 @if(count($v->answer_user) > 0)
 					<dl>
-						<dt></dt>
+						<dt>応募者情報</dt>
 						<dd>
 							<ul class="horizontal">
 								<li><a href="{{route('form_detail')}}/{{$v->id}}" class="button">応募者情報確認</a></li>
-								<li><a href="" class="button">CSV出力</a></li>
 							</ul>
+						</dd>
+					</dl>
+					<dl>
+						<dt>CSV出力</dt>
+						<dd>
+							<form action="{{route('form_csv_download')}}" method="post">
+@csrf
+							<input type="hidden" name="id" value="{{$v->id}}">
+							<ul class="horizontal">
+								<li><input type="text" size="12" name="csv_start" data-type="date" value=""/></li>
+								<li>～</li>
+								<li><input type="text" size="12" name="csv_end" data-type="date" value=""/></li>
+								<li>
+						<div class="submit">
+							<button type="submit">CSV出力</button>
+						</div>
+</li>
+							</ul>
+							</form>
 						</dd>
 					</dl>
 @endif

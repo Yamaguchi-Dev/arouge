@@ -197,10 +197,15 @@ class FormController extends Controller
     {
         $request = new CampaignFormRequest($request->all());
         $data = $request->except('_token');
+        $mode_url = route('form_confirm_preview');
 
+        if (!empty($data["mode"])) {
+            $mode = $data["mode"];
+            $mode_url = route($mode);
+        }
         Session::put('form_input_data', $data);
 
-        return view('admin.form.confirm', compact("data"));
+        return view('admin.form.confirm', compact("data", "mode_url"));
     }
 
     public function regist(CampaignFormRequest $request)
@@ -235,6 +240,8 @@ class FormController extends Controller
         $form->open_end = $data['open_end'];
         $form->apply_start = $data['apply_start'];
         $form->apply_end = $data['apply_end'];
+        $form->summary = $data['summary'];
+        $form->complete_page = $data['complete'];
         $form->view_status = $data['view_status'];
         $form->status = 1;
         $form->save();
@@ -283,7 +290,8 @@ class FormController extends Controller
             file_put_contents($file_name, "");
         }
 
-        return redirect(route('form_complete'));
+        session()->flash('status', '保存が完了しました');
+        return redirect(route('form_edit')."/".$insertId);
     }
 
     public function complete()
@@ -301,6 +309,7 @@ class FormController extends Controller
             if ($form_query->count() > 0) {
                 $form_data = $form_query->get()->toArray();
                 $data = $form_data[0];
+                $data['complete'] = $data['complete_page'];
                 foreach ($data['question'] as $k => $v) {
                     $data['q_title'][$k] = $v['title'];
                     $data['type'][$k] = $v['type'];
@@ -329,7 +338,7 @@ class FormController extends Controller
             }
         }
 
-        $title = "アルージェキャンペーン新規追加";
+        $title = "アルージェキャンペーン編集";
         return view('admin.form.edit', compact("title", "data", "no"));
     }
 
@@ -365,6 +374,8 @@ class FormController extends Controller
         $form->open_end = $data['open_end'];
         $form->apply_start = $data['apply_start'];
         $form->apply_end = $data['apply_end'];
+        $form->summary = $data['summary'];
+        $form->complete_page = $data['complete'];
         $form->view_status = $data['view_status'];
         $form->status = 1;
         $form->save();
@@ -407,13 +418,34 @@ class FormController extends Controller
             }
         }
 
-        return redirect(route('form_edit_complete'));
+        Session::put('form_input_data', $data);
+        session()->flash('status', '保存が完了しました');
+        return redirect(route('form_edit')."/".$insertId);
     }
 
     public function edit_complete()
     {
+
+        $data = Session::get('form_input_data');
         Session::forget('form_input_data');
-        return view('admin.form.edit_complete');
+        $no = $data["id"];
+        session()->flash('status', '保存が完了しました');
+
+        $title = "アルージェキャンペーン編集";
+        return view('admin.form.edit', compact("title", "data", "no"));
+    }
+
+    public function delete($id = null)
+    {
+        $form = new Form();
+
+        $form = $form->find($id);
+        $form->status = 2;
+        $form->save();
+
+        session()->flash('status', '削除が完了しました');
+
+        return redirect(route('form_list'));
     }
 
 
@@ -479,6 +511,10 @@ class FormController extends Controller
             $arr['zipcode'] = Crypt::decrypt($v->zipcode);
             $arr['address'] = config('common.pref')[$v->pref_id].Crypt::decrypt($v->address);
             $arr['tel'] = Crypt::decrypt($v->tel);
+            $arr['email'] = "";
+            if (!empty($v["email"])) {
+                $arr['email'] = Crypt::decrypt($v["email"]);
+            }
 
             $gender = "回答なし";
             if($v->gender_id == 1) {
@@ -504,9 +540,33 @@ class FormController extends Controller
         return view('admin.form.detail', compact("title", "form_data", "data", "user_data"));
     }
 
-    public function csv_download($form_id = null)
+    public function input_preview()
     {
-        if (empty($form_id)) return redirect(route('form_list'));
+        $data = Session::get('form_input_data');
+        return view('admin.form.preview', compact("data"));
+    }
+
+    public function complete_preview($id = null)
+    {
+        $data = array();
+        if (!empty($id)) {
+            $query = Form::with(['question', 'question.choice'])
+            ->where('forms.status', '=', 1)
+            ->where('id', '=', $id);
+
+            $arr = $query->get()->toArray();
+            $data = $arr[0];
+            $data['complete'] = $data['complete_page'];
+        } elseif (Session::has('form_input_data')) {
+            $data = Session::get('form_input_data');
+        }
+        return view('admin.form.complete_preview', compact("data"));
+    }
+
+    public function csv_download(SearchRequest $search_req)
+    {
+        $search_arr = array();
+        $search = new SearchRequest($search_req->all());
 
         $file_name = "arouge_sample_".date('YmdHis').".csv";
         $headers = [ //ヘッダー情報
@@ -517,15 +577,22 @@ class FormController extends Controller
             'Expires' => '0',
         ];
 
-        $callback = function() use($form_id)
+        $callback = function() use($search)
         {
             $createCsvFile = fopen('php://output', 'w'); //ファイル作成
 
-            $form_query = Form::with(['question'])->where('forms.id', '=', $form_id)->where('forms.status', '=', 1);
+            $form_query = Form::with(['question'])->where('forms.id', '=', $search->id)->where('forms.status', '=', 1);
             $form_data = $form_query->get()->first();
 
             $query = AnswerUser::with(['answer_choice', 'answer_choice.question', 'answer_choice.choice']);
-            $query->where('answer_users.forms_id', '=', $form_id);
+            if (!empty($search->csv_start)) {
+                $query->where('answer_users.created_at', '>=', $search->csv_start);
+            }
+
+            if (!empty($search->csv_end)) {
+                $query->where('answer_users.created_at', '<=', $search->csv_end);
+            }
+            $query->where('answer_users.forms_id', '=', $search->id);
 
             $data = $query->get()->toArray();
 
@@ -539,6 +606,10 @@ class FormController extends Controller
                 $arr['zipcode'] = Crypt::decrypt($v["zipcode"]);
                 $arr['address'] = config('common.pref')[$v["pref_id"]].Crypt::decrypt($v["address"]);
                 $arr['tel'] = Crypt::decrypt($v["tel"]);
+                $arr['email'] = "";
+                if (!empty($v["email"])) {
+                    $arr['email'] = Crypt::decrypt($v["email"]);
+                }
 
                 $gender = "回答なし";
                 if($v["gender_id"] == 1) {
@@ -568,6 +639,7 @@ class FormController extends Controller
                 '郵便番号',
                 '住所',
                 '電話番号',
+                'email',
                 '性別',
                 '生年月日',
             ];
@@ -586,6 +658,7 @@ class FormController extends Controller
                     $v["zipcode"],
                     $v["address"],
                     $v["tel"],
+                    $v["email"],
                     $v["gender"],
                     date("Y年m月d日", strtotime($v["birthday"])),
                 ];

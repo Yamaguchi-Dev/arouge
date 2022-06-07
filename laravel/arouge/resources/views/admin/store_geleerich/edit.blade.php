@@ -1,7 +1,7 @@
 @extends('layouts.app_edit')
 
 @section('content')
-				<form name="form1" action="{{route('store_update')}}" method="post">
+				<form name="form1" action="{{route('store_geleerich_update')}}" method="post">
 @csrf
 					<input type="hidden" name="id" value="@if(isset($data['id'])){{$data['id']}}@else{{old('id')}}@endif" /></dd>
 					<div class="elem-form">
@@ -45,8 +45,9 @@
 							<dt>お取り扱い状況</dt>
 							<dd>
 								<ul class="horizontal">
-									<li><label><input type="checkbox" name="bland[]" value="1" @if(isset($data['bland_arouge']) && $data['bland_arouge'] == 1) checked @elseif(!empty(old('bland')) && in_array(1, old('bland'))) checked @endif/><span class="label">アルージェ</span></label></li>
-									<li><label><input type="checkbox" name="bland[]" value="2" @if(isset($data['bland_enrich']) && $data['bland_enrich'] == 1) checked @elseif(!empty(old('bland')) && in_array(2, old('bland'))) checked @endif/><span class="label">エンリッチ</span></label></li>
+									<li><label><input type="checkbox" name="bland[]" value="1" @if(isset($data['bland_lueur']) && $data['bland_lueur'] == 1) checked @elseif(!empty(old('bland')) && in_array(1, old('bland'))) checked @endif/><span class="label">リュール</span></label></li>
+									<li><label><input type="checkbox" name="bland[]" value="2" @if(isset($data['bland_geleerich']) && $data['bland_geleerich'] == 1) checked @elseif(!empty(old('bland')) && in_array(2, old('bland'))) checked @endif/><span class="label">ジュレリッチ</span></label></li>
+									<li><label><input type="checkbox" name="bland[]" value="3" @if(isset($data['bland_etin']) && $data['bland_etin'] == 1) checked @elseif(!empty(old('bland')) && in_array(2, old('bland'))) checked @endif/><span class="label">エタン</span></label></li>
 								</ul>
 							</dd>
 						</dl>

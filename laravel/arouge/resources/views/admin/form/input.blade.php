@@ -1,9 +1,34 @@
 @extends('layouts.app')
 @section('content')
-				<form action="{{route('form_confirm')}}" target="iframe" method="post" id="form">
+<script>
+function goNext()
+{
+    document.form1.action = "{{route('form_regist')}}";
+    document.form1.target = "";
+    document.getElementById('next_btn').disabled = true;
+    document.form1.submit();
+}
+
+function goConfirmInput()
+{
+    document.form1.action = "{{route('form_confirm')}}";
+    document.form1.target = "iframe";
+    document.getElementById('mode').value = "form_input_preview";
+}
+
+function goConfirmComplete()
+{
+    document.form1.action = "{{route('form_confirm')}}";
+    document.form1.target = "iframe";
+    document.getElementById('mode').value = "form_complete_preview";
+}
+</script>
+
+				<form name="form1" action="{{route('form_confirm')}}" target="" method="post" id="form">
+					<input type="hidden" name="mode" id="mode" value="" />
 @csrf
 @if (isset($data["id"]))
-					<input type="hidden" name="id" value="@if(isset($data['id'])){{$data['id']}}@else{{old('id')}}@endif" /></dd>
+					<input type="hidden" name="id" value="@if(isset($data['id'])){{$data['id']}}@else{{old('id')}}@endif" />
 @endif
 					<div class="elem-form">
 @if (count($errors) > 0)
@@ -60,6 +85,13 @@ $error_arr = array_unique($errors->all());
 									<li><input type="text" size="12" data-type="date" name="apply_end" value="@if(isset($data['apply_end'])){{$data['apply_end']}}@else{{old('apply_end')}}@endif"/></li>
 								</ul>
 							</dd>
+						</dl>
+
+						<dl>
+							<dt>概要</dt>
+						</dl>
+						<dl>
+							<dd><textarea id="ckeditor_summary" name="summary">@if(isset($data['summary'])){{$data['summary']}}@else{{old('summary')}}@endif</textarea></dd>
 						</dl>
 
 						<div class="questions">
@@ -213,7 +245,23 @@ $error_arr = array_unique($errors->all());
 						</div>
 						
 						<div class="submit">
-							<button type="submit">追加する</button>
+							<button type="submit" onclick="javascript:goConfirmInput();">入力画面確認</button>
+						</div>
+
+						<dl>
+							<dt>完了画面</dt>
+						</dl>
+						<dl>
+							<dd><textarea id="ckeditor" name="complete">@if(isset($data['complete'])){{$data['complete']}}@else{{old('complete')}}@endif</textarea></dd>
+						</dl>
+
+						<div class="submit">
+							<button type="submit" onclick="javascript:goConfirmComplete();">完了画面確認</button>
+						</div>
+
+						
+						<div class="submit">
+							<button type="submit" onclick="javascript:goNext(); return false;">保存</button>
 						</div>
 					</div>
 				</form>
@@ -319,5 +367,18 @@ $error_arr = array_unique($errors->all());
 			})
 		})(document, window)
 	</script>
+<script src="{{ asset('ckeditor/ckeditor.js')}}"></script>
+<script>
+    CKEDITOR.replace('ckeditor', {
+        image_previewText:' ',
+        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token() ]) }}",
+        filebrowserUploadMethod: 'form'
+    });
 
+    CKEDITOR.replace('ckeditor_summary', {
+        image_previewText:' ',
+        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token() ]) }}",
+        filebrowserUploadMethod: 'form'
+    });
+</script>
 @endsection

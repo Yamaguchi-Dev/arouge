@@ -2,7 +2,7 @@
 
 @section('content')
 <script>
-function goCsv()
+function goSearch()
 {
     document.form1.action = "{{route('store_list_search')}}";
     document.form1.submit();

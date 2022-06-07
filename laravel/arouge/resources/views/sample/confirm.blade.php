@@ -30,7 +30,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 	
-    <!--#include virtual="/shared/include/header_bom.html" -->
+<?php include("../../shared/include/header_bom.html"); ?>
     <div class="wrapper">
 		<div class="title_bg">
 			<div class="breadClumbs">
@@ -101,8 +101,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 					<dt>電話番号</dt>
 					<dd>{{$data['txtTel_1']}}-{{$data['txtTel_2']}}-{{$data['txtTel_3']}}</dd>
 					
-					<!--<dt>E-mailアドレス</dt>
-					<dd>otani@favor.co.jp</dd>-->
+					<dt>E-mailアドレス</dt>
+					<dd>{{$data['txtEmail']}}</dd>
 					
 					<dt>性別</dt>
 					<dd>@if($data['USR_SEX'] == 1)男性 @elseif($data['USR_SEX'] == 2)女性 @else 回答しない @endif</dd>
@@ -127,7 +127,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	</div>
 
     
-    <!--#include virtual="/shared/include/footer_bom.html" -->
+<?php include("../../shared/include/footer_bom.html"); ?>
 </body>
 </html>
 

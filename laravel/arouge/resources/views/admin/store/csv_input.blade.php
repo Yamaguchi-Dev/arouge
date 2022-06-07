@@ -23,6 +23,9 @@
 						<dl>
 							<dt><label><input type="file" name="file_csv" id="input-file"/><span class="label">CSVファイル選択</span></label></dt>
 							<dd><input type="text" readonly value="ファイル未選択" id="label-file"/></dd>
+@if(!empty($update_date))
+							<dd style="text-align:center;">最終アップロード<br>{{$update_date}}</dd>
+@endif
 						</dl>
 						<div class="submit">
 							<button type="submit">CSVアップロード</button>

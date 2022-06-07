@@ -19,11 +19,22 @@
 						<dd><p class="confirm">{{$form_data->admin_title}}</p></dd>
 					</dl>
 					<dl>
-						<dt></dt>
+						<dt>CSV出力</dt>
 						<dd>
+							<form action="{{route('form_csv_download')}}" method="post">
+@csrf
+							<input type="hidden" name="id" value="{{$form_data->id}}">
 							<ul class="horizontal">
-								<li><a href="{{route('form_csv_download')}}/{{$form_data->id}}" class="button">CSV出力</a></li>
+								<li><input type="text" size="12" name="csv_start" data-type="date" value=""/></li>
+								<li>～</li>
+								<li><input type="text" size="12" name="csv_end" data-type="date" value=""/></li>
+								<li>
+						<div class="submit">
+							<button type="submit">CSV出力</button>
+						</div>
+</li>
 							</ul>
+							</form>
 						</dd>
 					</dl>
 				</div>

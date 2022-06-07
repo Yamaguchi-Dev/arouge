@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Form;
 use App\Models\Question;
 use App\Models\Choice;
 use App\Models\AnswerUser;
 use App\Models\AnswersChoice;
 use App\Http\Requests\SampleFormRequest;
+
+use App\Mail\CampaignAdminMail;
+use App\Mail\CampaignUserMail;
 
 use Illuminate\Support\Facades\Crypt;
 
@@ -60,6 +64,10 @@ class SampleController extends Controller
 
         $q_query = Question::where('questions.forms_id', '=', $data['id'])->where('questions.status', '=', 1);
         $q_res = $q_query->get()->toArray();
+
+        // 文字整形
+        $data["txtName_12"] = mb_convert_kana(mb_convert_kana($data["txtName_12"], 'KV', 'UTF-8'), 'C', 'UTF-8');
+        $data["txtName_22"] = mb_convert_kana(mb_convert_kana($data["txtName_22"], 'KV', 'UTF-8'), 'C', 'UTF-8');
 
         $q_data = array();
         foreach ($q_res as $k => $v) {
@@ -118,6 +126,7 @@ class SampleController extends Controller
             $answer_user->pref_id = $data['txtKenmei'];
             $answer_user->address = Crypt::encrypt($data['txtCity'].$data['txtTown'].$data['txtTown2']);
             $answer_user->tel = Crypt::encrypt($data['txtTel_1']."-".$data['txtTel_2']."-".$data['txtTel_3']);
+            $answer_user->email = Crypt::encrypt($data['txtEmail']);
             $answer_user->gender_id = $data['USR_SEX'];
             $answer_user->birthday = Crypt::encrypt($data['seireki']."-".$data['tuki']."-".$data['day']);
             $answer_user->status = 1;
@@ -161,6 +170,8 @@ class SampleController extends Controller
             }
         }
 
+        $this->send_user_mail($data, $q_data);
+        $this->send_admin_mail($data, $q_data);
         Session::put('sample_input_data', $data);
         return redirect(route('sample_complete'));
     }
@@ -171,7 +182,20 @@ class SampleController extends Controller
             return redirect('/');
         }
         $data = Session::get('sample_input_data');
+
+        $query = Form::where('id', '=', $data['id'])->get()->first();
+        $complete_page = $query->complete_page;
+
         Session::forget('sample_input_data');
-        return view('sample.complete', compact("data"));
+        return view('sample.complete', compact("data", "complete_page"));
     }
+
+    function send_user_mail($data, $q_data) {
+        Mail::to($data['txtEmail'])->send(new CampaignAdminMail('emails.campaign_admin', $data, $q_data));
+    }
+
+    function send_admin_mail($data, $q_data) {
+        Mail::to('kei.yamaguchi.0104@gmail.com')->send(new CampaignUserMail('emails.campaign_user', $data, $q_data));
+    }
+
 }

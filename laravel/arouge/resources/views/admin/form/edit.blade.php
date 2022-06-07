@@ -1,9 +1,54 @@
-@extends('layouts.app_edit')
+@extends('layouts.app')
 
 @section('content')
-				<form name="form1" action="{{route('form_update')}}" method="post">
+<style>
+.elem-form .submit {
+    flex-direction: row;
+}
+</style>
+<script>
+function goNext()
+{
+    document.form1.action = "{{route('form_update')}}";
+    document.form1.target = "";
+    document.getElementById('next_btn').disabled = true;
+    document.form1.submit();
+}
+
+function goConfirmInput()
+{
+    document.form1.action = "{{route('form_confirm')}}";
+    document.form1.target = "iframe";
+    document.getElementById('mode').value = "form_input_preview";
+}
+
+function goConfirmComplete()
+{
+    document.form1.action = "{{route('form_confirm')}}";
+    document.form1.target = "iframe";
+    document.getElementById('mode').value = "form_complete_preview";
+}
+
+function goDelete(id)
+{
+    document.form1.onsubmit = function(){ return false };
+    var title = document.getElementById('admin_title').value;
+
+    var result = window.confirm(title+"\r\nキャンペーンを削除しますか?");
+    if (result) {
+        window.location.href = "{{route('form_delete')}}/"+id;
+    } else {
+        document.form1.onsubmit = function(){ return true };
+    }
+    return false;
+}
+
+
+</script>
+				<form name="form1" action="{{route('form_update')}}" method="post" id="form">
+					<input type="hidden" name="mode" id="mode" value="" />
 @csrf
-					<input type="hidden" name="id" value="@if(isset($data['id'])){{$data['id']}}@else{{old('id')}}@endif" /></dd>
+					<input type="hidden" name="id" value="@if(isset($data['id'])){{$data['id']}}@else{{old('id')}}@endif" />
 					<div class="elem-form">
 @if (count($errors) > 0)
 						<div class="alert">
@@ -37,7 +82,7 @@
 						</dl>
 						<dl>
 							<dt>管理用タイトル</dt>
-							<dd><input type="text" name="admin_title" value="@if(isset($data['admin_title'])){{$data['admin_title']}}@else{{old('admin_title')}}@endif" /></dd>
+							<dd><input type="text" name="admin_title" id="admin_title" value="@if(isset($data['admin_title'])){{$data['admin_title']}}@else{{old('admin_title')}}@endif" /></dd>
 						</dl>
 						<dl>
 							<dt>掲載タイトル</dt>
@@ -56,6 +101,13 @@
 									<li><input type="text" size="12" data-type="date" name="apply_end" value="@if(isset($data['apply_end'])){{$data['apply_end']}}@else{{old('apply_end')}}@endif"/></li>
 								</ul>
 							</dd>
+						</dl>
+
+						<dl>
+							<dt>概要</dt>
+						</dl>
+						<dl>
+							<dd><textarea id="ckeditor_summary" name="summary">@if(isset($data['summary'])){{$data['summary']}}@else{{old('summary')}}@endif</textarea></dd>
 						</dl>
 
 						<div class="questions">
@@ -207,10 +259,29 @@
 							</ul>
 							<div class="add"><button type="button" data-type="add-question">設問追加</button></div>
 						</div>
+						<div class="submit">
+							<button type="button" class="btn-sub" onclick="javascript:location.reload();">元に戻す</button>
+							<button type="submit" onclick="javascript:goConfirmInput();">入力画面確認</button>
+						</div>
+
+						<dl>
+							<dt>完了画面</dt>
+						</dl>
+						<dl>
+							<dd><textarea id="ckeditor" name="complete">@if(isset($data['complete'])){{$data['complete']}}@else{{old('complete')}}@endif</textarea></dd>
+						</dl>
+
+						<div class="submit">
+							<button type="button" class="btn-sub" onclick="javascript:location.reload();">戻る</button>
+							<button type="submit" onclick="javascript:goConfirmComplete();">完了画面確認</button>
+						</div>
+
 						
 						<div class="submit">
-							<button type="submit">確定</button>
-							<button type="button" class="btn-sub" id="btn-close">戻る</button>
+							<button type="submit" onclick="javascript:goNext(); return false;">保存</button>
+						</div>
+						<div class="submit">
+							<button type="submit" onclick="javascript:goDelete(@if(isset($data['id'])){{$data['id']}}@else{{old('id')}}@endif); return false;">削除</button>
 						</div>
 					</div>
 				</form>
@@ -280,10 +351,13 @@
 				}
 			})
 
-
-			d.querySelector('#btn-close').addEventListener('click', function () {
-				w.parent.postMessage({ action: 'close' }, location.origin)
+			d.querySelector('#form').addEventListener('submit', function (e) {
+				var iframe = d.createElement('iframe')
+				iframe.classList.add('area-overlay')
+				iframe.name = 'iframe'
+				d.body.append(iframe)
 			})
+			
 			Array.from(d.querySelectorAll('input[data-type="date"]')).forEach(function (el) {
 				flatpickr(el, {
 					locale: 'ja',
@@ -297,4 +371,26 @@
 			})
 		})(document, window)
 	</script>
+	<script>
+		window.onload = function() {
+@if (session('status'))
+			alert("{{session('status')}}");
+@endif
+		}
+	</script>
+<script src="{{ asset('ckeditor/ckeditor.js')}}"></script>
+<script>
+var config = {image_previewText:'preview'};
+    CKEDITOR.replace('ckeditor', {
+        image_previewText:' ',
+        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token() ]) }}",
+        filebrowserUploadMethod: 'form'
+    });
+
+    CKEDITOR.replace('ckeditor_summary', {
+        image_previewText:' ',
+        filebrowserUploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token() ]) }}",
+        filebrowserUploadMethod: 'form'
+    });
+</script>
 @endsection

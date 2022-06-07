@@ -16,7 +16,11 @@
 	<script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
 </head>
 
+@if(preg_match("/^store_geleerich_.*/", Route::currentRouteName()))
+<body class="brand-geleerich">
+@else
 <body class="brand-arouge">
+@endif
 @if(preg_match("/^form_edit_.*/", Route::currentRouteName()))
 	<svg class="x-hide">
 		<symbol id="ico-up" viewBox="0 0 24 24"><path fill="currentColor" d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z" /></symbol>
@@ -26,7 +30,11 @@
 	<div class="area-container">
 		<div class="area-body">
 			<div class="area-title">
+@if(preg_match("/^store_geleerich_.*/", Route::currentRouteName()))
+				<h2>ジュレリッチ取扱店編集</h2>
+@else
 				<h2>アルージェ取扱店編集</h2>
+@endif
 			</div>
 
 			<div class="area-main">

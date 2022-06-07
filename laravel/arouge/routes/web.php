@@ -50,6 +50,7 @@ Route::post('/store/delete_done', 'App\Http\Controllers\StoreController@delete_d
 
 Route::get('/store_geleerich/list', 'App\Http\Controllers\StoreGeleerichController@list')->name('store_geleerich_list');
 Route::post('/store_geleerich/list', 'App\Http\Controllers\StoreGeleerichController@list')->name('store_geleerich_list_post');
+Route::post('/store_geleerich/csv_download', 'App\Http\Controllers\StoreGeleerichController@csv_download')->name('store_geleerich_csv_download');
 Route::get('/store_geleerich/input/{id}', 'App\Http\Controllers\StoreGeleerichController@input')->name('store_geleerich_input');
 Route::get('/store_geleerich/input', 'App\Http\Controllers\StoreGeleerichController@input')->name('store_geleerich_input');
 Route::get('/store_geleerich/confirm', 'App\Http\Controllers\StoreGeleerichController@confirm')->name('store_geleerich_confirm');
@@ -60,11 +61,17 @@ Route::get('/store_geleerich/complete', 'App\Http\Controllers\StoreGeleerichCont
 Route::get('/store_geleerich/csv_input', 'App\Http\Controllers\StoreGeleerichController@csv_input')->name('store_geleerich_csv_input');
 Route::post('/store_geleerich/csv_upload', 'App\Http\Controllers\StoreGeleerichController@csv_upload')->name('store_geleerich_csv_upload');
 Route::get('/store_geleerich/csv_complete', 'App\Http\Controllers\StoreGeleerichController@csv_complete')->name('store_geleerich_csv_complete');
-Route::post('/store_geleerich/view_change', 'App\Http\Controllers\StoreGeleerichController@view_change')->name('store_geleerich_view_change');
+Route::get('/store_geleerich/view_change/{id}', 'App\Http\Controllers\StoreGeleerichController@view_change')->name('store_geleerich_view_change');
+Route::get('/store_geleerich/view_change', 'App\Http\Controllers\StoreGeleerichController@view_change')->name('store_geleerich_view_change');
 Route::get('/store_geleerich/delete', 'App\Http\Controllers\StoreGeleerichController@delete')->name('store_geleerich_delete');
 Route::post('/store_geleerich/delete_search', 'App\Http\Controllers\StoreGeleerichController@delete_search')->name('store_geleerich_delete_search');
 Route::post('/store_geleerich/delete_confirm', 'App\Http\Controllers\StoreGeleerichController@delete_confirm')->name('store_geleerich_delete_confirm');
 Route::post('/store_geleerich/delete_done', 'App\Http\Controllers\StoreGeleerichController@delete_done')->name('store_geleerich_delete_done');
+Route::get('/store_geleerich/edit/{id}', 'App\Http\Controllers\StoreGeleerichController@edit')->name('store_geleerich_edit_id');
+Route::get('/store_geleerich/edit', 'App\Http\Controllers\StoreGeleerichController@edit')->name('store_geleerich_edit');
+Route::get('/store_geleerich/update', 'App\Http\Controllers\StoreGeleerichController@update')->name('store_geleerich_update');
+Route::post('/store_geleerich/update', 'App\Http\Controllers\StoreGeleerichController@update')->name('store_geleerich_update_post');
+Route::get('/store_geleerich/edit_complete', 'App\Http\Controllers\StoreGeleerichController@edit_complete')->name('store_geleerich_edit_complete');
 
 Route::get('/form/', 'App\Http\Controllers\FormController@index')->name('form');
 Route::get('/form/login', 'App\Http\Controllers\FormController@login')->name('form_login');
@@ -84,12 +91,17 @@ Route::get('/form/edit', 'App\Http\Controllers\FormController@edit')->name('form
 Route::get('/form/update', 'App\Http\Controllers\FormController@update')->name('form_update');
 Route::post('/form/update', 'App\Http\Controllers\FormController@update')->name('form_update_post');
 Route::get('/form/edit_complete', 'App\Http\Controllers\FormController@edit_complete')->name('form_edit_complete');
+Route::get('/form/delete/{form_id}', 'App\Http\Controllers\FormController@delete')->name('form_delete_id');
+Route::get('/form/delete', 'App\Http\Controllers\FormController@delete')->name('form_delete');
 Route::get('/form/search', 'App\Http\Controllers\FormController@search')->name('form_search');
 Route::post('/form/search', 'App\Http\Controllers\FormController@search')->name('form_search_post');
 Route::get('/form/detail/{form_id}', 'App\Http\Controllers\FormController@detail')->name('form_detail_id');
 Route::get('/form/detail', 'App\Http\Controllers\FormController@detail')->name('form_detail');
-Route::get('/form/csv_download/{form_id}', 'App\Http\Controllers\FormController@csv_download')->name('form_csv_download_id');
 Route::get('/form/csv_download', 'App\Http\Controllers\FormController@csv_download')->name('form_csv_download');
+Route::post('/form/csv_download', 'App\Http\Controllers\FormController@csv_download')->name('form_csv_download_post');
+Route::get('/form/input_preview', 'App\Http\Controllers\FormController@input_preview')->name('form_input_preview');
+Route::get('/form/complete_preview/{id}', 'App\Http\Controllers\FormController@complete_preview')->name('form_complete_preview_id');
+Route::get('/form/complete_preview', 'App\Http\Controllers\FormController@complete_preview')->name('form_complete_preview');
 
 Route::get('/input/{id}', 'App\Http\Controllers\SampleController@input')->name('sample_input_id');
 Route::get('/input', 'App\Http\Controllers\SampleController@input')->name('sample_input');
@@ -102,4 +114,5 @@ Route::get('/complete', 'App\Http\Controllers\SampleController@complete')->name(
 // 検索用API
 Route::get('/api/store/arouge_city','App\Http\Controllers\API\StoreController@arouge_city')->name('store_arouge_city');
 Route::get('/api/store/arouge_search','App\Http\Controllers\API\StoreController@arouge_search')->name('store_arouge_search');
-Route::get('/api/store/geleerich_search','App\Http\Controllers\API\StoreController@geleerich_search')->name('store_geleerich_search');
+
+Route::post('/ckeditor/upload', 'App\Http\Controllers\CkeditorController@upload')->name('ckeditor.upload');

@@ -10,6 +10,7 @@ use App\Http\Requests\SearchRequest;
 use App\Http\Requests\StoreRequest;
 use App\Models\User;
 use App\Models\Store;
+use App\Models\UplodeDateArouge;
 
 use App\Mail\SampleMail;
 
@@ -93,6 +94,7 @@ class StoreController extends Controller
         }
 
         if (!empty($search->zipcode)) {
+            $search->zipcode = mb_convert_kana($search->zipcode, 'n', 'UTF-8');
             $query->where('zipcode', 'LIKE', "%$search->zipcode%");
         }
 
@@ -105,6 +107,7 @@ class StoreController extends Controller
         }
 
         if (!empty($search->tel)) {
+            $search->tel = mb_convert_kana($search->tel, 'n', 'UTF-8');
             $query->where('tel', 'LIKE', "%$search->tel%");
         }
 
@@ -166,16 +169,16 @@ class StoreController extends Controller
                 $query->where('tel', 'LIKE', "%$search->tel%");
             }
 
-            if (!empty($search->bland)) {
-                $query->where(function($q2) use($search) {
-                    if (in_array(1, $search->bland)) {
-                        $q2->orWhere('bland_csv', 'LIKE', "%1%");
-                    }
-                    if (in_array(2, $search->bland)) {
-                        $q2->orWhere('bland_csv', 'LIKE', "%2%");
-                    }
-                });
-            }
+        if (!empty($search->bland)) {
+            $query->where(function($q2) use($search) {
+                if (in_array(1, $search->bland)) {
+                    $q2->orWhere('bland_arouge', '=', "1");
+                }
+                if (in_array(2, $search->bland)) {
+                    $q2->orWhere('bland_enrich', '=', "1");
+                }
+            });
+        }
 
             $data = $query->get()->toArray();
 
@@ -195,12 +198,6 @@ class StoreController extends Controller
             fputcsv($createCsvFile, $columns); //1行目の情報を追記
 
             foreach ($data as $k => $v) {
-                $bland_id = explode(",", $v["bland_csv"]);
-                $bland = array();
-                foreach ($bland_id as $k2 => $v2) {
-                    $bland[] = $v2 == "1" ? "アルージェ" : "エンリッチ";
-                }
-
                 $csv = [
                     $v["id"],
                     $v["account_code"],
@@ -250,7 +247,6 @@ class StoreController extends Controller
             if ($store_query->count() > 0) {
                 $store_data = $store_query->get()->toArray();
                 $data = $store_data[0];
-                $data['bland'] = explode(",", $data['bland_csv']);
             }
         }
         if (\old()) {
@@ -274,7 +270,8 @@ class StoreController extends Controller
         $store->pref_id = $data['pref_id'];
         $store->address = $data['address'];
         $store->tel = $data['tel'];
-        $store->bland_csv = implode(',', $data['bland']);
+        $store->bland_arouge = in_array(1, $data['bland']) ? 1 : 0;
+        $store->bland_enrich = in_array(2, $data['bland']) ? 1 : 0;
 
         $store->save();
 
@@ -294,8 +291,15 @@ class StoreController extends Controller
             $errors = Session::get('errors');
             Session::forget('errors');
         }
+
+        $update_date = "";
+        $update_res = UplodeDateArouge::where("status", "=", 1)->orderBy('id', 'desc')->first();
+        if (!empty($update_res)) {
+            $update_date = date("Y.m.d", strtotime($update_res->created_at));
+        }
+
         $title = "アルージェ取扱店CSVアップロード";
-        return view('admin.store.csv_input', compact('errors', 'title'));
+        return view('admin.store.csv_input', compact('errors', 'title', 'update_date'));
     }
 
     public function csv_upload(Request $request)
@@ -335,6 +339,7 @@ class StoreController extends Controller
             $contents = $v;
             if ($k > 0) {
                 $contents[3] = trim($v[3]);
+                $contents[7] = trim($v[7]);
                 //$contents[5] = $this->cng_unicode($v[5]);
             }
             $data[] = $contents;
@@ -376,7 +381,7 @@ class StoreController extends Controller
 
             // 電話番号
             if (empty($v[3])) {
-                $errors[] = $row.'行目の電話番号が空欄です。';
+                //$errors[] = $row.'行目の電話番号が空欄です。';
             } elseif (!$this->chk_tel($v[3])) {
                 $errors[] = $row.'行目の電話番号を正しく入力してください。';
             }
@@ -430,6 +435,11 @@ class StoreController extends Controller
 
             $stores->save();
         }
+
+        $update_date = new UplodeDateArouge();
+        $update_date->status = 1;
+        $update_date->save();
+
         session()->flash('status', 'アップロードしました');
         return redirect()->route("store_csv_input");
     }

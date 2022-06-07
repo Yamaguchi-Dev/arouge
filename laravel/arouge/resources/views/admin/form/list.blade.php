@@ -81,21 +81,38 @@
 						<dd><p class="confirm">{{date("Y年m月d日", strtotime($v->apply_start))}}（{{config('common.week_jp')[date("w", strtotime($v->apply_start))]}}）～ {{date("Y年m月d日", strtotime($v->apply_end))}}（{{config('common.week_jp')[date("w", strtotime($v->apply_end))]}}）</p></dd>
 					</dl>
 					<dl>
-						<dt>設問</dt>
-						<dd><a href="{{route('form_preview')}}/{{$v->id}}" target="_blank" class="button">確認</a></dd>
+						<dt></dt>
+						<dd><a href="{{route('form_preview')}}/{{$v->id}}" target="_blank" class="button">入力画面確認</a>&nbsp;<a href="{{route('form_complete_preview')}}/{{$v->id}}" target="_blank" class="button">完了画面確認</a>&nbsp;<a href="{{route('form_edit')}}/{{$v->id}}" class="button">編集</a> </dd>
 					</dl>
+@if(count($v->answer_user) > 0)
 					<dl>
 						<dt>応募者情報</dt>
-@if(count($v->answer_user) > 0)
 						<dd>
 							<ul class="horizontal">
-								<li><a href="{{route('form_detail')}}/{{$v->id}}" class="button">確認</a></li>
-								<li><a href="{{route('form_csv_download')}}/{{$v->id}}" class="button">CSV出力</a></li>
+								<li><a href="{{route('form_detail')}}/{{$v->id}}" class="button">応募者情報確認</a></li>
 							</ul>
 						</dd>
-@endif
 					</dl>
-					<div class="submit"><a href="{{route('form_edit')}}/{{$v->id}}" target="iframe" class="button">編集</a></div>
+					<dl>
+						<dt>CSV出力</dt>
+						<dd>
+							<form action="{{route('form_csv_download')}}" method="post">
+@csrf
+							<input type="hidden" name="id" value="{{$v->id}}">
+							<ul class="horizontal">
+								<li><input type="text" size="12" name="csv_start" data-type="date" value=""/></li>
+								<li>～</li>
+								<li><input type="text" size="12" name="csv_end" data-type="date" value=""/></li>
+								<li>
+						<div class="submit">
+							<button type="submit">CSV出力</button>
+						</div>
+</li>
+							</ul>
+							</form>
+						</dd>
+					</dl>
+@endif
 				</div>
 @endforeach
 
@@ -142,5 +159,12 @@
 				})
 			})
 		})(document, window)
+	</script>
+	<script>
+		window.onload = function() {
+@if (session('status'))
+			alert("{{session('status')}}");
+@endif
+		}
 	</script>
 @endsection

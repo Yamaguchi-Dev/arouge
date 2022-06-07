@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--<meta http-equiv="refresh" content="3; URL=https://www.arouge.com/">-->
-<title>完了画面｜アルージェを試す（サンプル応募）｜Arouge（アルージェ）</title>
-<meta name="description" content="「アルージェのバリア保湿 サンプルセット」プレゼントの入力完了画面です。">
+<title>入力フォーム｜アルージェを試す（サンプル応募）｜Arouge（アルージェ）</title>
+<meta name="description" content="「アルージェのバリア保湿 サンプルセット」プレゼントの入力フォームです。">
 <meta name="keywords" content="サンプル,応募,アルージェ,Arouge,敏感肌,バリア保湿,スキンケア">
+<!--<meta http-equiv="refresh" content="3; URL=https://www.arouge.com/">-->
 <link rel="stylesheet" href="/shared/css/reset.css" media="all">
 <link rel="stylesheet" href="/shared/css/common.css" media="all">
 <link rel="stylesheet" href="/shared/css/common_sp.css" media="all">
 <link rel="stylesheet" href="/shared/css/form.css" media="all">
-<link rel="stylesheet" href="/special/moisture_mist_lotion_2/css/style.css" media="all">
 <script src="/shared/js/jquery.js"></script>
 <script src="/shared/js/script.js"></script>
-
+<script type="text/javascript" src="js/zipSuggest.js" charset="utf-8"></script>
+	
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Cache-Control" content="no-cache">
 <!-- Google Tag Manager -->
@@ -31,7 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 	
-<?php include("../../shared/include/header_http.html"); ?>
+<?php include("../shared/include/header_http.html"); ?>
     <div class="wrapper">
 		<div class="title_bg">
 			<div class="breadClumbs">
@@ -55,15 +55,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			<div class="contents thanks sample_cont">
 				<h2>ご応募いただきありがとうございました。</h2>
 				
-				<p class="ac mb0">{{$data['txtName_1']}} {{$data['txtName_2']}} 様 受付番号　700113　で承りました。</p>
+				<p class="ac mb0"> 様 受付番号　700113　で承りました。</p>
                 
 <?php
-echo $complete_page;
+echo $data['complete'];
 ?>
-
 			</div>
 		</div>
 	</div>
-<?php include("../../shared/include/footer_bom.html"); ?>
+<?php include("../shared/include/footer_bom.html"); ?>
 </body>
 </html>

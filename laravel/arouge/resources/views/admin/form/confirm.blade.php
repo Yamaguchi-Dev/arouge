@@ -32,7 +32,7 @@ function goNext()
 
 			<div class="area-main">
 				<div class="elem-preview">
-					<iframe src="{{route('form_confirm_preview')}}" frameborder="0"></iframe>
+					<iframe src="{{$mode_url}}" frameborder="0"></iframe>
 				</div>
 
 				<form name="form1" action="{{route('form_regist')}}" method="POST">
@@ -59,7 +59,9 @@ function goNext()
 		@endforeach
 					<div class="elem-form">
 						<div class="submit">
+<!--
 							<button id="next_btn" onclick="javascript:goNext(); return false;">確定</button>
+-->
 							<button type="button" class="btn-sub" id="btn-close">戻る</button>
 						</div>
 					</div>
@@ -70,11 +72,11 @@ function goNext()
 	<script>
 		(function (d, w) {
 			d.querySelector('#btn-close').addEventListener('click', function () {
-				w.parent.postMessage({ action: 'reload' }, location.origin)
+				//w.parent.postMessage({ action: 'reload' }, location.origin)
+				w.parent.location.reload();
 			})
 		})(document, window)
 	</script>
 </body>
 
 </html>
-login
